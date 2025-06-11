@@ -258,7 +258,7 @@ async function handleSalvarRastreio(e) {
             title: 'Cadastro realizado!',
             text: 'Redirecionando para tela inicial...',
             timer: 2000,
-            willClose: () => window.location.href = '../Home/home.html'
+            willClose: () => window.location.href = 'locatenow/Home/home.html'
         });
     } catch (error) {
         console.error('Erro no cadastro:', error);
