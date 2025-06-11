@@ -1,0 +1,321 @@
+<!--/*
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║                                                                      ║
+  ║   ██████╗ ██╗   ██╗    ██████╗ ███╗   ██╗███████╗██████╗ ██╗███████╗ ║
+  ║   ██╔══██╗╚██╗ ██╔╝    ██╔══██╗████╗  ██║██╔════╝██╔══██╗██║██╔════╝ ║
+  ║   ██████╔╝ ╚████╔╝     ██║  ██║██╔██╗ ██║█████╗  ██████╔╝██║███████╗ ║
+  ║   ██╔══██╗  ╚██╔╝      ██║  ██║██║╚██╗██║██╔══╝  ██╔══██╗██║╚════██║ ║
+  ║   ██████╔╝   ██║       ██████╔╝██║ ╚████║███████╗██║  ██║██║███████║ ║
+  ║   ╚═════╝    ╚═╝       ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝ ║
+  ║                                                                      ║
+  ║  Desenvolvido por: Daniel Neris Gomes                                ║
+  ║  Email: Dnerisgg@gmail.com                                           ║
+  ║  Instagram: _Dneris                                                  ║  
+  ║  Projeto: LocateNow                                                  ║
+  ║                                                                      ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+*/-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LocateNow - Rastreio Inteligente</title>
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/cabecalho.css" />
+  <link rel="stylesheet" href="../css/home.css" />
+  <link rel="stylesheet" href="../css/chatBOT.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <!-- Cabeçalho -->
+  <header class="header-sophisticated shadow-bottom-5">
+    <div class="container d-flex align-items-center justify-content-between py-3">
+      <div class="logo-container d-flex align-items-center position-relative">
+        <i class="fas fa-map-marker-alt logo-icon me-3"></i>
+
+        <div class="logo-text-wrapper position-relative">
+          <h1 class="m-0 logo-text">LocateNow</h1>
+          <p class="m-0 slogan">Rastreamento inteligente de encomendas</p>
+
+          <!-- Múltiplas caixinhas -->
+          <div class="box-curve-path">
+            <span class="box box-1"></span>
+            <span class="box box-2"></span>
+            <span class="box box-3"></span>
+            <span class="box box-4"></span>
+            <span class="box box-5"></span>
+          </div>
+
+        </div>
+
+        <!-- Linha animada representando a rota -->
+        <svg class="route-line" width="100" height="20" viewBox="0 0 100 20" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 10 Q50 0, 100 10" stroke="#007BFF" stroke-width="2" stroke-dasharray="5,5" />
+        </svg>
+
+        <!-- Caminhão (inicialmente escondido ) -->
+        <i class="fas fa-truck truck-icon ms-1"></i>
+      </div>
+
+      <div class="dropdown dropdown-hover">
+        <button class="menu-button" type="button" id="menuDropdown">
+          <div class="menu-icon">
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+          </div>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#"><i class="fas fa-home me-2"></i>Início</a></li>
+          <li><a class="dropdown-item" href="#quem-somos"><i class="fas fa-info-circle me-2"></i>Quem Somos</a></li>
+          <li>
+            <a class="dropdown-item" href="javascript:void(0);"
+              onclick="openPage('../CadastrarRastreio/cadastro.html')">
+              <i class="fas fa-plus-circle me-2"></i>Cadastrar Código
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#"><i class="fas fa-headset me-2"></i>Suporte</a></li>
+          <li><a class="dropdown-item" href="#"><i class="fas fa-mobile-alt me-2"></i>Baixar App</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- Cabeçalho -->
+
+  <div class="full-bg-section"> <!-- BACKGROUND HERO SECTION -->
+    <!-- Partículas de fundo -->
+    <div id="particles-js" class="particles-container"></div>
+
+    <!-- Inicio - Hero Section -->
+    <section class="hero text-center py-5 position-relative">
+      <div class="container py-4">
+        <h1 class="mb-3 animate-pop-in">Acompanhe suas encomendas em tempo real</h1>
+        <p class="lead mb-4">Rastreamento simples, rápido e sem complicações. Basta informar o código ou CPF.</p>
+
+        <div class="row justify-content-center mb-3">
+          <div class="col-md-8">
+            <label for="ipt_search" class="visually-hidden">Buscar código ou CPF</label>
+            <div class="input-group shadow-sm neon-border">
+              <input type="text" class="form-control form-control-lg border-0" id="ipt_search"
+                placeholder="Digite seu código de rastreio ou CPF" />
+              <button class="btn btn-primary btn-lg d-flex align-items-center justify-content-center" type="button"
+                id="btn_search">
+                <i class="fas fa-search me-2"></i> Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn btn-outline-primary btn-lg mt-3" href="javascript:void(0);"
+          onclick="openPage('../CadastrarRastreio/cadastro.html')">
+          <i class="fas fa-plus-circle me-2"></i>Cadastrar Novo Código
+        </a>
+      </div>
+    </section>
+
+    <!-- Tabela -->
+    <section class="py-4 bg-transparent table-section">
+      <div class="container">
+        <h4 class="mb-4 text-center text-gradient">Rastreio detalhado das suas encomendas e em tempo real:</h4>
+        <div class="table-responsive rounded shadow-sm glass-effect">
+          <table id="tabela-rastreamento" class="table table-hover align-middle">
+            <thead class="table-primary">
+              <tr>
+                <th class="text-center">Código</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Última Localização</th>
+                <th class="text-center">Previsão de Entrega</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Preenchido dinamicamente pelo JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- Tabela -->
+  </div>
+  <!-- Fim - Hero Section -->
+
+  <!-- Como Funciona -->
+  <section class="py-5 bg-light como-funciona">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+          <h2 class="mb-5 position-relative d-inline-block text-gradient">Como funciona</h2>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-lift">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="fas fa-robot fa-3x text-primary animate-float"></i>
+              </div>
+              <h5 class="card-title text-primary">1. Acesse nosso chatbot</h5>
+              <p class="card-text">Fale conosco via site, WhatsApp ou Telegram no horário que quiser.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-lift">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="fas fa-barcode fa-3x text-primary animate-float"></i>
+              </div>
+              <h5 class="card-title text-primary">2. Envie seu código ou CPF</h5>
+              <p class="card-text">Cole o código de rastreamento ou seu CPF no chat.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-lift">
+            <div class="card-body text-center">
+              <div class="icon-wrapper mb-3">
+                <i class="fas fa-map-marked-alt fa-3x text-primary animate-float"></i>
+              </div>
+              <h5 class="card-title text-primary">3. Receba atualizações</h5>
+              <p class="card-text">Obtenha informações em tempo real sobre o status e a localização da sua encomenda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quem Somos -->
+  <section id="quem-somos" class="py-5 bg-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+          <h2 class="mb-4 position-relative d-inline-block text-gradient">Quem Somos</h2>
+        </div>
+      </div>
+      <p class="text-center lead mx-auto mb-5" style="max-width: 800px;">
+        LocateNow é uma empresa inovadora de tecnologia focada em facilitar o rastreamento de encomendas enviadas pelos
+        Correios.
+        Através de um sistema inteligente integrado a um chatbot, a LocateNow permite que os usuários acompanhem em
+        tempo real o status
+        e a localização dos seus pedidos de forma simples, rápida e intuitiva.
+      </p>
+
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="feature-box">
+            <i class="fas fa-robot feature-icon"></i>
+            <h4>Chatbot Inteligente</h4>
+            <p>
+              O chatbot da LocateNow está disponível em múltiplas plataformas (como WhatsApp, Telegram e site oficial),
+              e funciona 24/7. Basta o usuário informar o código de rastreamento, e o sistema retorna automaticamente
+              as atualizações mais recentes sobre o envio.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="feature-box">
+            <i class="fas fa-chart-line feature-icon"></i>
+            <h4>Experiência do Usuário</h4>
+            <p>
+              Com foco em experiência do usuário, automação e transparência, a LocateNow transforma a forma como
+              consumidores acompanham suas encomendas, eliminando a necessidade de acessar portais complicados e
+              oferecendo um atendimento mais humanizado e acessível.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="feature-box">
+            <i class="fas fa-comments feature-icon"></i>
+            <h4>Como Funciona</h4>
+            <p>
+              O usuário entra em contato com o chatbot por meio do site da LocateNow, envia o código de rastreamento
+              ou CPF, e recebe imediatamente informações sobre status atual, localização mais recente e previsão de
+              entrega.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="feature-box">
+            <i class="fas fa-shield-alt feature-icon"></i>
+            <h4>Simplicidade e Segurança</h4>
+            <p>
+              O chatbot elimina a burocracia e torna o rastreamento de encomendas mais acessível, especialmente para
+              quem prefere se comunicar por mensagens em vez de navegar por sites complexos, tudo com total segurança.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="mt-auto py-4 bg-dark text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <h5>LocateNow</h5>
+          <p>Rastreamento inteligente com atendimento 24h via chatbot.</p>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h5>Contato</h5>
+          <p>Email: suporte@locatenow.com.br<br>Telefone: (11) 99999-9999</p>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h5>Siga-nos</h5>
+          <a href="#" class="text-white me-3 social-icon"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="text-white me-3 social-icon"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-white social-icon"><i class="fab fa-whatsapp fa-lg"></i></a>
+        </div>
+      </div>
+      <div class="text-center pt-3 border-top border-secondary">
+        &copy; 2025 LocateNow. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery (deve vir sempre antes do DataTables e Bootstrap JS) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Bootstrap Bundle (inclui Popper ) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- DataTables Core-->
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+  <!-- DataTables + Bootstrap 5 Integration (deve vir após o core ) -->
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+  <!-- Efeitos Especiais -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <!-- Dexie.js (para IndexedDB ) -->
+  <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.2/dist/dexie.min.js"></script>
+
+
+  <script src="../js/db.js"></script>
+  <script src="../js/controller.js"></script>
+  <script src="../js/css.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="home.js"></script>
+</body>
+
+</html>
