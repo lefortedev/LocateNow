@@ -68,8 +68,8 @@ const chatbotKnowledge = {
 };
 
 // Inicialização do chatbot - Adiciona o botão e janela do chat ao DOM
-$(document).ready(function() {
-  // Garante que o botão do chatbot só seja criado uma única vez
+$(document).ready(function () {
+  // Garante que o botão só seja adicionado uma única vez
   if ($('#chatbotToggle').length === 0) {
     $('body').append(`
       <div class="chatbot-container">
@@ -99,30 +99,43 @@ $(document).ready(function() {
     `);
   }
 
-  // Toggle chatbot window - Abre/fecha o chatbot ao clicar no botão
-  $('#chatbotToggle').off('click').on('click', function() {
+  // Abre ou fecha o chatbot
+  $(document).on('click', '#chatbotToggle', function () {
+    const $toggle = $(this);
+    const message = $('#chatbotInput').val().trim();
+
+    // Se houver texto, processa a mensagem e NÃO fecha o chat
+    if (message) {
+      addUserMessage(message);
+      $('#chatbotInput').val('');
+      processMessage(message);
+      $toggle.removeClass('lupa').html('<i class="fas fa-robot"></i>');
+      return;
+    }
+
+    // Caso contrário, abre ou fecha o chat
     $('#chatbotWindow').toggleClass('active');
     if ($('#chatbotWindow').hasClass('active')) {
       $('#chatbotInput').focus();
     }
   });
 
-  // Fecha o chatbot ao clicar no X
-  $('#chatbotClose').off('click').on('click', function() {
+  // Fecha o chatbot
+  $(document).on('click', '#chatbotClose', function () {
     $('#chatbotWindow').removeClass('active');
   });
 
   // Envia mensagem ao pressionar Enter
-  $('#chatbotInput').keypress(function(e) {
+  $('#chatbotInput').keypress(function (e) {
     if (e.which === 13) {
       sendMessage();
     }
   });
 
   // Envia mensagem ao clicar no botão de envio
-  $('#chatbotSend').off('click').on('click', sendMessage);
+  $('#chatbotSend').click(sendMessage);
 
-  // Muda o ícone do botão para lupa quando há texto digitado
+  // Muda o ícone para lupa quando há texto digitado
   $('#chatbotInput').on('input', function () {
     const hasText = $(this).val().trim() !== '';
     const $toggle = $('#chatbotToggle');
@@ -133,20 +146,6 @@ $(document).ready(function() {
     } else {
       $toggle.removeClass('lupa');
       $toggle.html('<i class="fas fa-robot"></i>');
-    }
-  });
-
-  // Envia a mensagem automaticamente ao clicar no botão com a lupa ativa
-  $(document).on('click', '#chatbotToggle', function () {
-    const $toggle = $(this);
-    if ($toggle.hasClass('lupa')) {
-      const message = $('#chatbotInput').val().trim();
-      if (message) {
-        addUserMessage(message);
-        $('#chatbotInput').val('');
-        processMessage(message);
-        $toggle.removeClass('lupa').html('<i class="fas fa-robot"></i>');
-      }
     }
   });
 });
